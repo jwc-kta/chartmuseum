@@ -81,10 +81,10 @@ jobs:
           docker run --rm mplatform/mquery ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
       - name: Install Kubernetes SBOM Tool
         uses: puerco/bom-installer@aa0837e37b6965b5fc50adfad0683ec3c0a2c2c4
-      - name: Install sigstore cosign
-        uses: sigstore/cosign-installer@main
-        with:
-          cosign-version: 'v2.2.4'
+#      - name: Install sigstore cosign
+#        uses: sigstore/cosign-installer@main
+#        with:
+#          cosign-version: 'v2.2.4'
 #      This releases to Azure - from upstream
 #      - name: Release artifacts (includes SBOM and signatures)
 #        id: release-artifacts
@@ -94,16 +94,16 @@ jobs:
 #          COSIGN_EXPERIMENTAL: "true"
 #        run: |
 #          SKIP_BUILD=true VERSION="${{ steps.prepare.outputs.version }}" ./scripts/release-artifacts.sh
-      - name: Sign the published images (via GitHub OIDC token)
-        env:
-          COSIGN_EXPERIMENTAL: "true"
-        run: |
-          cosign sign --yes ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
-      - name: Attach SBOM to published images
-        env:
-          COSIGN_EXPERIMENTAL: "true"
-        run: |
-          cosign attach sbom --sbom _dist/chartmuseum-${{ steps.prepare.outputs.version }}.spdx ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
+#      - name: Sign the published images (via GitHub OIDC token)
+#        env:
+#          COSIGN_EXPERIMENTAL: "true"
+#        run: |
+#          cosign sign --yes ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
+#      - name: Attach SBOM to published images
+#        env:
+#          COSIGN_EXPERIMENTAL: "true"
+#        run: |
+#          cosign attach sbom --sbom _dist/chartmuseum-${{ steps.prepare.outputs.version }}.spdx ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
       - name: Clear
         if: always()
         run: |
