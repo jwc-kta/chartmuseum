@@ -79,8 +79,8 @@ jobs:
       - name: Docker Check Manifest
         run: |
           docker run --rm mplatform/mquery ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
-      - name: Install Kubernetes SBOM Tool
-        uses: puerco/bom-installer@aa0837e37b6965b5fc50adfad0683ec3c0a2c2c4
+#      - name: Install Kubernetes SBOM Tool
+#        uses: puerco/bom-installer@aa0837e37b6965b5fc50adfad0683ec3c0a2c2c4
 #      - name: Install sigstore cosign
 #        uses: sigstore/cosign-installer@main
 #        with:
